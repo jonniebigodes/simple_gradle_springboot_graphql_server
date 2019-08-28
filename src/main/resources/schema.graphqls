@@ -1,0 +1,49 @@
+type Query{
+  customerById(id:ID!):Customer
+  allCustomers:[Customer]
+  allProducts:[Product]
+  allOrders:[Order]
+}
+type Mutation{
+  createOrder(order:CreateOrderInput!):Order!
+  deleteOrder(id:ID!):String
+  createCustomer(customer:CreateCustomerInput!):Customer!
+  deleteCustomer(id:ID!):String
+  createProduct(product:CreateProductInput!):Product!
+  deleteProduct(id:ID!):String
+
+}
+input CreateProductInput{
+  name:String!
+  description:String!
+  price:String!
+}
+input CreateCustomerInput{
+ name:String!
+ email:String!
+}
+input CreateOrderInput {
+    customerId: ID!
+    productId: ID!
+    quantity: Int!
+}
+
+type Customer{
+  id:ID!
+  name:String!
+  email:String!
+  orders:[Order]
+}
+type Order{
+  id:ID!
+  customer:Customer!
+  product: Product!
+  quantity: Int!
+  status:String!
+}
+type Product{
+ id:ID!
+ name:String
+ description:String
+ price:String
+}
